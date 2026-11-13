@@ -2,18 +2,21 @@ name: Autonomous Tech Radar Autopilot
 
 on:
   schedule:
-    # التشغيل التلقائي كل 6 ساعات يعمل بالوضع العادي الافتراضي (normal)
+    # كل 6 ساعات
     - cron: '0 */6 * * *'
+    # التقرير الأسبوعي يوم الجمعة الساعة 18:00 UTC
+    - cron: '0 18 * * 5'
   workflow_dispatch:
     inputs:
       mode:
-        description: 'اختر وضع الرصد (normal = الرائج ذو الصعود | full = شامل بدون فلترة)'
+        description: 'اختر وضع التشغيل (normal = الرائج والقفزات | full = شامل بدون فلترة | weekly = التقرير الأسبوعي)'
         required: true
         default: 'normal'
         type: choice
         options:
           - normal
           - full
+          - weekly
 
 permissions:
   contents: write
@@ -30,18 +33,26 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: تشغيل محرك الرصد والتحليل والتجربة
+      - name: تحديد الوضع الفعال وتشغيل المحرك
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RADAR_MODE: ${{ github.event.inputs.mode || 'normal' }}
-        run: python radar_engine.py
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          INPUT_MODE: ${{ github.event.inputs.mode }}
+        run: |
+          if [ "$EVENT_SCHEDULE" = "0 18 * * 5" ]; then
+            export RADAR_MODE="weekly"
+          else
+            export RADAR_MODE="${INPUT_MODE:-normal}"
+          fi
+          python radar_engine.py
 
-      - name: حفظ الذاكرة والتقارير الجديدة تلقائياً
+      - name: حفظ الذاكرة والتقارير والأصول البرمجية تلقائياً
         run: |
           git config --local user.email "autopilot@radar.bot"
           git config --local user.name "TechRadar Bot"
-          git add memory.json reports/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update radar reports & memory" && git push)
+          mkdir -p reports assets
+          git add memory.json reports/ assets/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update radar reports, memory & MVP assets" && git push)
