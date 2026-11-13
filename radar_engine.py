@@ -9,7 +9,6 @@ import urllib.error
 from datetime import datetime, timedelta
 
 # ==================== 1. الإعدادات والمفاتيح ====================
-# .strip() تزيل أي مسافات أو أسطر زائدة قد تحدث أثناء نسخ المفاتيح إلى GitHub Secrets
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
@@ -25,7 +24,7 @@ DOMAINS = {
     "تحليل البيانات والتجارة": "(ecommerce OR price-tracker OR web-scraper OR market-analysis OR trading-bot)"
 }
 
-# كلمات مستبعدة لتنقية الرادار من الضجيج البرمجي والألعاب
+# كلمات مستبعدة لتنقية الرادار من الضجيج
 NOISE_KEYWORDS = {
     "roblox", "cheat", "aimbot", "crack", "keygen", "free-nitro",
     "hack-tool", "homework", "assignment", "leetcode", "dotfiles", "my-config"
@@ -49,7 +48,7 @@ def save_memory(seen_ids):
 
 
 def http_request(url, method="GET", headers=None, data=None, timeout=20, as_json=True):
-    req_headers = {"User-Agent": "AutonomousTechRadar/2.0"}
+    req_headers = {"User-Agent": "AutonomousTechRadar/3.0"}
     if headers:
         req_headers.update(headers)
     req = urllib.request.Request(url, data=data, headers=req_headers, method=method)
@@ -63,9 +62,49 @@ def is_noise(text):
     return any(bad in lowered for bad in NOISE_KEYWORDS)
 
 
-# ==================== 3. طبقة الرصد المزدوج (رادار الصفر + العادي) ====================
+# ==================== 3. الاكتشاف الذاتي لأحدث نماذج Gemini ====================
+def discover_active_gemini_models():
+    """جلب أحدث نماذج Gemini الفعالة تلقائياً من حسابك لمنع أخطاء 404 مستقبلاً"""
+    fallback_models = ["gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.5-flash"]
+    if not GEMINI_API_KEY:
+        return fallback_models
+
+    excluded_tags = ("embedding", "imagen", "veo", "tts", "audio", "aqa", "robotics", "computer-use")
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}"
+        data = http_request(url, timeout=15, as_json=True)
+        flash_models = []
+        other_models = []
+
+        for m in data.get("models", []):
+            methods = m.get("supportedGenerationMethods", [])
+            if "generateContent" not in methods:
+                continue
+            name = m.get("name", "").replace("models/", "")
+            if not name.startswith("gemini-") or any(tag in name for tag in excluded_tags):
+                continue
+            if "flash" in name:
+                flash_models.append(name)
+            else:
+                other_models.append(name)
+
+        # ترتيب تنازلي لاختيار أحدث إصدار أولاً (مثل gemini-3.8-flash)
+        flash_models.sort(reverse=True)
+        other_models.sort(reverse=True)
+        discovered = flash_models + other_models
+
+        if discovered:
+            print(f"🧠 النماذج المكتشفة تلقائياً: {', '.join(discovered[:4])}")
+            return discovered[:5]
+    except Exception as e:
+        print(f"⚠️ تعذر جلب قائمة النماذج تلقائياً، سيتم استخدام القائمة الافتراضية: {e}")
+
+    return fallback_models
+
+
+# ==================== 4. طبقة الرصد المزدوج (رادار الصفر + العادي) ====================
 def verify_github_repo_structure(repo_full_name, gh_headers):
-    """التحقق من أن المستودع يحتوي على ملفات برمجية حقيقية وليس مجرد مجلد فارغ"""
+    """التحقق من وجود ملفات برمجية حقيقية داخل المستودع"""
     try:
         contents_url = f"https://api.github.com/repos/{repo_full_name}/contents"
         items = http_request(contents_url, headers=gh_headers, timeout=12, as_json=True)
@@ -96,11 +135,9 @@ def fetch_github_discoveries(seen_ids):
         gh_headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
     for domain_name, query_terms in DOMAINS.items():
-        # 1. مسار رادار الصفر: أحدث المشاريع (آخر 24 ساعة) حتى لو كانت بـ 0 نجوم
         zero_q = urllib.parse.quote(f"{query_terms} created:>={yesterday} stars:>=0 size:>=5")
         zero_url = f"https://api.github.com/search/repositories?q={zero_q}&sort=updated&order=desc&per_page=8"
 
-        # 2. المسار العادي: مشاريع صاعدة ومثبتة خلال آخر 7 أيام
         std_q = urllib.parse.quote(f"{query_terms} created:>={last_week} stars:>=20 size:>=10")
         std_url = f"https://api.github.com/search/repositories?q={std_q}&sort=stars&order=desc&per_page=5"
 
@@ -120,12 +157,10 @@ def fetch_github_discoveries(seen_ids):
                     full_name = repo["full_name"]
                     desc = (repo.get("description") or "").strip()
 
-                    # استبعاد المشاريع المنسوخة أو المؤرشفة أو ذات الوصف الضعيف أو الضجيج
                     if repo.get("fork") or repo.get("archived") or len(desc) < 30 or is_noise(f"{full_name} {desc}"):
                         seen_ids.add(uid)
                         continue
 
-                    # فحص هيكل الملفات قبل الاعتماد
                     has_code, file_list = verify_github_repo_structure(full_name, gh_headers)
                     if not has_code:
                         seen_ids.add(uid)
@@ -142,7 +177,7 @@ def fetch_github_discoveries(seen_ids):
                         "metrics": f"النجوم: {repo['stargazers_count']} | اللغة: {repo.get('language') or 'متعددة'} | الحجم: {repo.get('size', 0)}KB",
                         "files": file_list
                     })
-                    break  # أفضل مرشح موثق لكل مجال ومسار
+                    break
                 time.sleep(1.2)
             except Exception as e:
                 print(f"⚠️ تنبيه جلب GitHub ({domain_name}): {e}")
@@ -151,7 +186,7 @@ def fetch_github_discoveries(seen_ids):
 
 
 def fetch_hn_discoveries(seen_ids):
-    """رصد أحدث الابتكارات والنقاشات من Hacker News (مسار الصفر + المسار العادي)"""
+    """رصد أحدث الابتكارات والنقاشات من Hacker News"""
     discoveries = []
     keywords = (
         "ai", "agent", "saas", "automate", "automation", "scrape", "scraper",
@@ -202,13 +237,12 @@ def fetch_hn_discoveries(seen_ids):
     return discoveries
 
 
-# ==================== 4. طبقة الفحص والتجربة التقنية المباشرة ====================
+# ==================== 5. طبقة الفحص والتجربة التقنية المباشرة ====================
 def technical_probe(item):
-    """اختبار استجابة الرابط واستخلاص التوثيق الفعلي أو محتوى الصفحة للتحقق من الجاهزية"""
+    """اختبار استجابة الرابط واستخلاص التوثيق الفعلي أو محتوى الصفحة"""
     notes = []
     start_time = time.time()
 
-    # 1. فحص توفر الرابط وسرعة الاستجابة
     try:
         req = urllib.request.Request(item["url"], headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=12) as resp:
@@ -224,7 +258,6 @@ def technical_probe(item):
     except Exception as e:
         notes.append(f"- حالة الرابط: تعذر الفتح المباشر ({str(e)[:120]})")
 
-    # 2. إذا كان مستودع GitHub: عرض الملفات المكتشفة وسحب ملف README الفعلي
     if item["source"] == "github":
         if item.get("files"):
             notes.append(f"- الملفات الرئيسية في المستودع: {', '.join(item['files'])}")
@@ -243,19 +276,18 @@ def technical_probe(item):
     return "\n".join(notes)
 
 
-# ==================== 5. محرك التحليل والاستغلال (Gemini API) ====================
-def call_gemini_api(prompt_text):
+# ==================== 6. محرك التحليل والاستغلال (Gemini API) ====================
+def call_gemini_api(prompt_text, active_models):
     if not GEMINI_API_KEY:
         return "❌ لم يتم ضبط GEMINI_API_KEY في GitHub Secrets.", False
 
-    models = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"]
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt_text}]}],
         "generationConfig": {"temperature": 0.4}
     }).encode("utf-8")
 
     last_error = ""
-    for model in models:
+    for model in active_models:
         endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={GEMINI_API_KEY}"
         for attempt in range(2):
             try:
@@ -274,7 +306,7 @@ def call_gemini_api(prompt_text):
                 last_error = f"HTTP {e.code} [{model}]: {err_body[:250]}"
                 print(f"❌ فشل {model} (محاولة {attempt + 1}): HTTP {e.code}")
                 if e.code == 429:
-                    time.sleep(10)  # انتظار عند تجاوز حد الطلبات في الدقيقة
+                    time.sleep(10)
                     continue
                 if e.code in (400, 403):
                     print(f"🚨 خطأ في صلاحية المفتاح: {last_error}")
@@ -288,7 +320,7 @@ def call_gemini_api(prompt_text):
     return f"⚠️ تعذر إتمام التحليل حالياً: {last_error}", False
 
 
-def analyze_discovery(item, probe_data):
+def analyze_discovery(item, probe_data, active_models):
     prompt = f"""
 أنت مهندس استغلال تقني ومحلل أعمال صارم. قم بتشخيص الاكتشاف التالي بموضوعية تامة دون أي ترويج أو مبالغة:
 
@@ -309,10 +341,10 @@ def analyze_discovery(item, probe_data):
 5. **الاستخدام العملي والحياتي:** سيناريو تطبيق يومي ملموس وسريع.
 6. **دليل التشغيل والاستفادة الفورية:** خطوات عملية مرقمة (1، 2، 3) للبدء فوراً بناءً على التوثيق والملفات المفحوصة.
 """
-    return call_gemini_api(prompt)
+    return call_gemini_api(prompt, active_models)
 
 
-def generate_executive_summary(analyzed_items):
+def generate_executive_summary(analyzed_items, active_models):
     if len(analyzed_items) <= 1:
         return ""
     brief_list = "\n".join([f"- {x['title']} ({x['mode']}): {x['analysis'][:300]}..." for x in analyzed_items])
@@ -322,11 +354,11 @@ def generate_executive_summary(analyzed_items):
 
 اكتب فقرة قصيرة (4 أسطر كحد أقصى) باللغة العربية بعنوان **أفضل فرصة ذهبية في هذه الدورة** تحدد فيها الاكتشاف الأكثر ربحية وقابلية للتطبيق الفوري اليوم ولماذا.
 """
-    summary_text, ok = call_gemini_api(prompt)
+    summary_text, ok = call_gemini_api(prompt, active_models)
     return f"{summary_text}\n\n---\n\n" if ok else ""
 
 
-# ==================== 6. الإرسال الذكي إلى تيليجرام ====================
+# ==================== 7. الإرسال الذكي إلى تيليجرام ====================
 def smart_chunk_text(text, max_len=3800):
     if len(text) <= max_len:
         return [text]
@@ -374,9 +406,10 @@ def send_to_telegram(text):
             print(f"❌ خطأ إرسال تيليجرام: {e}")
 
 
-# ==================== 7. نقطة التشغيل الرئيسية ====================
+# ==================== 8. نقطة التشغيل الرئيسية ====================
 def main():
     print("🚀 بدء دورة الرصد والتشخيص والاستغلال...")
+    active_models = discover_active_gemini_models()
     seen_ids = load_memory()
 
     discoveries = fetch_github_discoveries(seen_ids) + fetch_hn_discoveries(seen_ids)
@@ -392,9 +425,8 @@ def main():
     for item in discoveries:
         print(f"🔍 فحص وتحليل: {item['title']} | [{item['mode']}]")
         probe_data = technical_probe(item)
-        analysis, success = analyze_discovery(item, probe_data)
+        analysis, success = analyze_discovery(item, probe_data, active_models)
 
-        # نحفظ العنصر في الذاكرة فقط إذا نجح تحليله كي لا تضيع الفرص عند تعطل المفتاح مؤقتاً
         if success:
             seen_ids.add(item["uid"])
             analyzed_records.append({"title": item["title"], "mode": item["mode"], "analysis": analysis})
@@ -408,9 +440,9 @@ def main():
             f"{analysis}\n"
         )
         report_sections.append(section)
-        time.sleep(2.5)  # تنظيم الإيقاع لاحترام حدود الحصة المجانية
+        time.sleep(2.5)
 
-    exec_summary = generate_executive_summary(analyzed_records)
+    exec_summary = generate_executive_summary(analyzed_records, active_models)
     header = f"# تقرير الرصد والاستغلال التقني ({now_str} UTC)\n\n{exec_summary}"
     full_report = header + "\n---\n\n".join(report_sections)
 
