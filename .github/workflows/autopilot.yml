@@ -1,0 +1,37 @@
+name: Autonomous Tech Radar Autopilot
+
+on:
+  schedule:
+    # يعمل تلقائياً كل 6 ساعات (4 مرات يومياً) مجاناً بالكامل
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # يتيح لك التشغيل اليدوي الفوري بضغطة زر
+
+permissions:
+  contents: write
+
+jobs:
+  run-radar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب ملفات النظام
+        uses: actions/checkout@v4
+
+      - name: إعداد بيئة Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: تشغيل محرك الرصد والتحليل والتجربة
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python radar_engine.py
+
+      - name: حفظ الذاكرة والتقارير الجديدة تلقائياً
+        run: |
+          git config --local user.email "autopilot@radar.bot"
+          git config --local user.name "TechRadar Bot"
+          git add memory.json reports/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update radar reports & memory" && git push)
