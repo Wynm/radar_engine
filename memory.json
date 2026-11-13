@@ -257,5 +257,40 @@
     "first_seen": "2026-11-13T16:34:04.943089+00:00",
     "last_seen": "2026-11-13T16:34:04.943089+00:00",
     "breakout_alerted": false
+  },
+  "gh_1448721877": {
+    "title": "hembramneeraj3-create/aida-64-extreme",
+    "stars": 1208,
+    "first_seen": "2026-11-13T19:21:01.664368+00:00",
+    "last_seen": "2026-11-13T19:21:01.664368+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1447908999": {
+    "title": "Stratumgreawning7/MemeCoin-Sniper-Bot",
+    "stars": 55,
+    "first_seen": "2026-11-13T19:21:01.664368+00:00",
+    "last_seen": "2026-11-13T19:21:01.664368+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50486748": {
+    "title": "AI unlocks Gödel's notebooks, said to contain hundreds of proved theorems",
+    "stars": 167,
+    "first_seen": "2026-11-13T19:21:01.664368+00:00",
+    "last_seen": "2026-11-13T19:21:01.664368+00:00",
+    "breakout_alerted": false
+  },
+  "ph_02e8ec0c2ffd76d89d05": {
+    "title": "Replicate",
+    "stars": 0,
+    "first_seen": "2026-11-13T19:21:01.664368+00:00",
+    "last_seen": "2026-11-13T19:21:01.664368+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17060": {
+    "title": "Ropedia Xperience 2: A Gold Standard for Scaling Physical AI Environments and Behaviors",
+    "stars": 25,
+    "first_seen": "2026-11-13T19:21:01.664368+00:00",
+    "last_seen": "2026-11-13T19:21:01.664368+00:00",
+    "breakout_alerted": false
   }
 }
