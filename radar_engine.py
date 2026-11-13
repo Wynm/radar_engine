@@ -1,18 +1,28 @@
 import os
 import re
+import sys
 import json
 import time
 import html
 import urllib.request
 import urllib.parse
 import urllib.error
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
-# ==================== 1. الإعدادات والمفاتيح ====================
+# ==================== 1. الإعدادات وتحديد وضع التشغيل ====================
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
+
+# تحديد الوضع: "normal" (افتراضي - الضجة والصعود) أو "full" (شامل بدون فلترة)
+RAW_MODE = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get("RADAR_MODE", "normal")).strip().lower()
+RADAR_MODE = "full" if RAW_MODE == "full" else "normal"
+
+MODE_LABELS = {
+    "normal": "الوضع العادي (المستجدات الرائجة ذات الصعود الملفت)",
+    "full": "الوضع التام (الرصد الشامل لكل المستجدات بدون فلترة)"
+}
 
 MEMORY_FILE = "memory.json"
 REPORT_DIR = "reports"
@@ -24,7 +34,7 @@ DOMAINS = {
     "تحليل البيانات والتجارة": "(ecommerce OR price-tracker OR web-scraper OR market-analysis OR trading-bot)"
 }
 
-# كلمات مستبعدة لتنقية الرادار من الضجيج
+# كلمات مستبعدة في الوضع العادي فقط لتنقية الضجيج
 NOISE_KEYWORDS = {
     "roblox", "cheat", "aimbot", "crack", "keygen", "free-nitro",
     "hack-tool", "homework", "assignment", "leetcode", "dotfiles", "my-config"
@@ -44,11 +54,11 @@ def load_memory():
 
 def save_memory(seen_ids):
     with open(MEMORY_FILE, "w", encoding="utf-8") as f:
-        json.dump(list(seen_ids)[-3000:], f, ensure_ascii=False, indent=2)
+        json.dump(list(seen_ids)[-4000:], f, ensure_ascii=False, indent=2)
 
 
 def http_request(url, method="GET", headers=None, data=None, timeout=20, as_json=True):
-    req_headers = {"User-Agent": "AutonomousTechRadar/3.0"}
+    req_headers = {"User-Agent": "AutonomousTechRadar/4.0"}
     if headers:
         req_headers.update(headers)
     req = urllib.request.Request(url, data=data, headers=req_headers, method=method)
@@ -62,9 +72,21 @@ def is_noise(text):
     return any(bad in lowered for bad in NOISE_KEYWORDS)
 
 
+def calculate_star_velocity(repo):
+    """حساب سرعة صعود النجوم في الساعة لقياس حجم الضجة"""
+    stars = repo.get("stargazers_count", 0)
+    created_str = repo.get("created_at", "")
+    try:
+        created_dt = datetime.strptime(created_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        age_hours = max((datetime.now(timezone.utc) - created_dt).total_seconds() / 3600.0, 1.0)
+        return round(stars / age_hours, 2)
+    except Exception:
+        return 0.0
+
+
 # ==================== 3. الاكتشاف الذاتي لأحدث نماذج Gemini ====================
 def discover_active_gemini_models():
-    """جلب أحدث نماذج Gemini الفعالة تلقائياً من حسابك لمنع أخطاء 404 مستقبلاً"""
+    """جلب أحدث نماذج Gemini الفعالة تلقائياً لمنع أخطاء 404 مستقبلاً"""
     fallback_models = ["gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.5-flash"]
     if not GEMINI_API_KEY:
         return fallback_models
@@ -77,8 +99,7 @@ def discover_active_gemini_models():
         other_models = []
 
         for m in data.get("models", []):
-            methods = m.get("supportedGenerationMethods", [])
-            if "generateContent" not in methods:
+            if "generateContent" not in m.get("supportedGenerationMethods", []):
                 continue
             name = m.get("name", "").replace("models/", "")
             if not name.startswith("gemini-") or any(tag in name for tag in excluded_tags):
@@ -88,7 +109,6 @@ def discover_active_gemini_models():
             else:
                 other_models.append(name)
 
-        # ترتيب تنازلي لاختيار أحدث إصدار أولاً (مثل gemini-3.8-flash)
         flash_models.sort(reverse=True)
         other_models.sort(reverse=True)
         discovered = flash_models + other_models
@@ -97,149 +117,152 @@ def discover_active_gemini_models():
             print(f"🧠 النماذج المكتشفة تلقائياً: {', '.join(discovered[:4])}")
             return discovered[:5]
     except Exception as e:
-        print(f"⚠️ تعذر جلب قائمة النماذج تلقائياً، سيتم استخدام القائمة الافتراضية: {e}")
+        print(f"⚠️ تعذر جلب قائمة النماذج تلقائياً: {e}")
 
     return fallback_models
 
 
-# ==================== 4. طبقة الرصد المزدوج (رادار الصفر + العادي) ====================
-def verify_github_repo_structure(repo_full_name, gh_headers):
-    """التحقق من وجود ملفات برمجية حقيقية داخل المستودع"""
+# ==================== 4. طبقة الرصد حسب الوضع المختار ====================
+def get_github_files(repo_full_name, gh_headers):
     try:
         contents_url = f"https://api.github.com/repos/{repo_full_name}/contents"
         items = http_request(contents_url, headers=gh_headers, timeout=12, as_json=True)
-        if not isinstance(items, list) or len(items) == 0:
-            return False, []
-        filenames = [item.get("name", "") for item in items]
-        code_indicators = (
-            ".py", ".js", ".ts", ".go", ".rs", ".java", ".cpp", ".sh",
-            "package.json", "requirements.txt", "pyproject.toml", "Dockerfile",
-            "Cargo.toml", "go.mod", "src", "app", "lib", "index.html"
-        )
-        has_real_code = any(
-            name.endswith(code_indicators) or name in code_indicators
-            for name in filenames
-        )
-        return has_real_code, filenames[:15]
+        if isinstance(items, list):
+            return [item.get("name", "") for item in items][:15]
     except Exception:
-        return False, []
+        pass
+    return []
 
 
 def fetch_github_discoveries(seen_ids):
     discoveries = []
-    yesterday = (datetime.utcnow() - timedelta(days=1)).strftime("%Y-%m-%d")
-    last_week = (datetime.utcnow() - timedelta(days=7)).strftime("%Y-%m-%d")
+    now_utc = datetime.now(timezone.utc)
+    yesterday = (now_utc - timedelta(days=1)).strftime("%Y-%m-%d")
+    last_week = (now_utc - timedelta(days=7)).strftime("%Y-%m-%d")
 
     gh_headers = {"Accept": "application/vnd.github.v3+json"}
     if GITHUB_TOKEN:
         gh_headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
     for domain_name, query_terms in DOMAINS.items():
-        zero_q = urllib.parse.quote(f"{query_terms} created:>={yesterday} stars:>=0 size:>=5")
-        zero_url = f"https://api.github.com/search/repositories?q={zero_q}&sort=updated&order=desc&per_page=8"
+        if RADAR_MODE == "normal":
+            # الوضع العادي: فقط المشاريع التي حققت صعوداً ملفتاً (50+ نجمة خلال آخر 7 أيام)
+            q = urllib.parse.quote(f"{query_terms} created:>={last_week} stars:>=50")
+            url = f"https://api.github.com/search/repositories?q={q}&sort=stars&order=desc&per_page=10"
+            pick_limit = 2
+        else:
+            # الوضع التام: كل المشاريع الحديثة آخر 24 ساعة بدون أي شرط للنجوم أو المشاهدات
+            q = urllib.parse.quote(f"{query_terms} created:>={yesterday} stars:>=0")
+            url = f"https://api.github.com/search/repositories?q={q}&sort=updated&order=desc&per_page=10"
+            pick_limit = 2
 
-        std_q = urllib.parse.quote(f"{query_terms} created:>={last_week} stars:>=20 size:>=10")
-        std_url = f"https://api.github.com/search/repositories?q={std_q}&sort=stars&order=desc&per_page=5"
+        picked = 0
+        try:
+            data = http_request(url, headers=gh_headers, as_json=True)
+            for repo in data.get("items", []):
+                uid = f"gh_{repo['id']}"
+                if uid in seen_ids:
+                    continue
 
-        modes = [
-            ("رادار الصفر (جديد كلياً - 0+ نجوم)", zero_url),
-            ("تشخيص عادي (صاعد ومثبت)", std_url)
-        ]
+                full_name = repo["full_name"]
+                desc = (repo.get("description") or "لا يوجد وصف نصي مرفق").strip()
 
-        for mode_label, url in modes:
-            try:
-                data = http_request(url, headers=gh_headers, as_json=True)
-                for repo in data.get("items", []):
-                    uid = f"gh_{repo['id']}"
-                    if uid in seen_ids:
-                        continue
-
-                    full_name = repo["full_name"]
-                    desc = (repo.get("description") or "").strip()
-
-                    if repo.get("fork") or repo.get("archived") or len(desc) < 30 or is_noise(f"{full_name} {desc}"):
+                # تطبيق الفلترة في الوضع العادي فقط
+                if RADAR_MODE == "normal":
+                    if repo.get("fork") or repo.get("archived") or is_noise(f"{full_name} {desc}"):
                         seen_ids.add(uid)
                         continue
 
-                    has_code, file_list = verify_github_repo_structure(full_name, gh_headers)
-                    if not has_code:
-                        seen_ids.add(uid)
-                        continue
+                velocity = calculate_star_velocity(repo)
+                file_list = get_github_files(full_name, gh_headers)
 
-                    discoveries.append({
-                        "uid": uid,
-                        "source": "github",
-                        "mode": mode_label,
-                        "domain": domain_name,
-                        "title": full_name,
-                        "url": repo["html_url"],
-                        "description": desc,
-                        "metrics": f"النجوم: {repo['stargazers_count']} | اللغة: {repo.get('language') or 'متعددة'} | الحجم: {repo.get('size', 0)}KB",
-                        "files": file_list
-                    })
+                discoveries.append({
+                    "uid": uid,
+                    "source": "github",
+                    "mode": MODE_LABELS[RADAR_MODE],
+                    "domain": domain_name,
+                    "title": full_name,
+                    "url": repo["html_url"],
+                    "description": desc,
+                    "metrics": (
+                        f"النجوم: {repo['stargazers_count']} (سرعة الصعود: {velocity} نجمة/ساعة) | "
+                        f"التفريعات (Forks): {repo.get('forks_count', 0)} | اللغة: {repo.get('language') or 'متعددة'}"
+                    ),
+                    "files": file_list
+                })
+                picked += 1
+                if picked >= pick_limit:
                     break
-                time.sleep(1.2)
-            except Exception as e:
-                print(f"⚠️ تنبيه جلب GitHub ({domain_name}): {e}")
+            time.sleep(1.2)
+        except Exception as e:
+            print(f"⚠️ تنبيه جلب GitHub ({domain_name}): {e}")
 
     return discoveries
 
 
 def fetch_hn_discoveries(seen_ids):
-    """رصد أحدث الابتكارات والنقاشات من Hacker News"""
     discoveries = []
     keywords = (
         "ai", "agent", "saas", "automate", "automation", "scrape", "scraper",
         "ecommerce", "data", "tool", "open source", "open-source", "llm", "workflow", "api"
     )
 
-    endpoints = [
-        ("رادار الصفر (لحظة النشر على HN)", "https://hacker-news.firebaseio.com/v0/newstories.json", 30, 1),
-        ("تشخيص عادي (الأكثر تفاعلاً على HN)", "https://hacker-news.firebaseio.com/v0/topstories.json", 25, 1)
-    ]
+    if RADAR_MODE == "normal":
+        # الوضع العادي: المواضيع الرائجة ذات التفاعل المرتفع (80+ نقطة أو 40+ تعليق)
+        feed_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
+        scan_limit = 45
+        pick_limit = 2
+    else:
+        # الوضع التام: أحدث المنشورات لحظة نزولها بدون أي شرط للنقاط أو الكلمات
+        feed_url = "https://hacker-news.firebaseio.com/v0/newstories.json"
+        scan_limit = 25
+        pick_limit = 3
 
-    for mode_label, feed_url, scan_limit, pick_limit in endpoints:
-        picked = 0
-        try:
-            story_ids = http_request(feed_url, as_json=True)[:scan_limit]
-            for sid in story_ids:
-                uid = f"hn_{sid}"
-                if uid in seen_ids:
+    picked = 0
+    try:
+        story_ids = http_request(feed_url, as_json=True)[:scan_limit]
+        for sid in story_ids:
+            uid = f"hn_{sid}"
+            if uid in seen_ids:
+                continue
+
+            item = http_request(f"https://hacker-news.firebaseio.com/v0/item/{sid}.json", as_json=True)
+            if not item or not item.get("url") or not item.get("title"):
+                continue
+
+            title = item["title"].strip()
+            score = item.get("score", 0)
+            comments = item.get("descendants", 0)
+
+            if RADAR_MODE == "normal":
+                # اشتراط ضجة واضحة + ارتباط بالمجالات التقنية/الربحية
+                if (score < 80 and comments < 40) or is_noise(title):
+                    continue
+                if not any(k in title.lower() for k in keywords):
                     continue
 
-                item = http_request(f"https://hacker-news.firebaseio.com/v0/item/{sid}.json", as_json=True)
-                if not item or not item.get("url") or not item.get("title"):
-                    continue
-
-                title = item["title"].strip()
-                if is_noise(title):
-                    seen_ids.add(uid)
-                    continue
-
-                if any(k in title.lower() for k in keywords):
-                    discoveries.append({
-                        "uid": uid,
-                        "source": "hn",
-                        "mode": mode_label,
-                        "domain": "تقنيات الويب والأعمال والذكاء الاصطناعي",
-                        "title": title,
-                        "url": item["url"],
-                        "description": f"طرح تقني على Hacker News: {title}",
-                        "metrics": f"النقاط: {item.get('score', 0)} | التعليقات: {item.get('descendants', 0)}",
-                        "files": []
-                    })
-                    picked += 1
-                    if picked >= pick_limit:
-                        break
-        except Exception as e:
-            print(f"⚠️ تنبيه جلب Hacker News ({mode_label}): {e}")
+            discoveries.append({
+                "uid": uid,
+                "source": "hn",
+                "mode": MODE_LABELS[RADAR_MODE],
+                "domain": "تقنيات الويب والأعمال والذكاء الاصطناعي",
+                "title": title,
+                "url": item["url"],
+                "description": f"طرح على Hacker News: {title}",
+                "metrics": f"النقاط (التقييم): {score} | التعليقات: {comments}",
+                "files": []
+            })
+            picked += 1
+            if picked >= pick_limit:
+                break
+    except Exception as e:
+        print(f"⚠️ تنبيه جلب Hacker News: {e}")
 
     return discoveries
 
 
 # ==================== 5. طبقة الفحص والتجربة التقنية المباشرة ====================
 def technical_probe(item):
-    """اختبار استجابة الرابط واستخلاص التوثيق الفعلي أو محتوى الصفحة"""
     notes = []
     start_time = time.time()
 
@@ -260,7 +283,7 @@ def technical_probe(item):
 
     if item["source"] == "github":
         if item.get("files"):
-            notes.append(f"- الملفات الرئيسية في المستودع: {', '.join(item['files'])}")
+            notes.append(f"- الملفات الموجودة في المستودع: {', '.join(item['files'])}")
 
         gh_headers = {"Accept": "application/vnd.github.raw+json"}
         if GITHUB_TOKEN:
@@ -271,7 +294,7 @@ def technical_probe(item):
             if readme_raw:
                 notes.append(f"- مقتطف التوثيق الفعلي (README):\n{readme_raw[:1800]}")
         except Exception:
-            notes.append("- ملاحظة التوثيق: لا يوجد ملف README قياسي، يعتمد على قراءة الكود مباشرة.")
+            notes.append("- ملاحظة التوثيق: لا يوجد ملف README قياسي، تم فحص هيكل الملفات.")
 
     return "\n".join(notes)
 
@@ -324,11 +347,11 @@ def analyze_discovery(item, probe_data, active_models):
     prompt = f"""
 أنت مهندس استغلال تقني ومحلل أعمال صارم. قم بتشخيص الاكتشاف التالي بموضوعية تامة دون أي ترويج أو مبالغة:
 
-- المسار: {item['mode']}
+- وضع الفحص: {item['mode']}
 - المجال: {item['domain']}
 - العنوان/المستودع: {item['title']}
 - الرابط: {item['url']}
-- المؤشرات: {item['metrics']}
+- المؤشرات والزخم: {item['metrics']}
 - الوصف الأولي: {item['description']}
 - نتائج الفحص التقني المباشر:
 {probe_data}
@@ -347,7 +370,7 @@ def analyze_discovery(item, probe_data, active_models):
 def generate_executive_summary(analyzed_items, active_models):
     if len(analyzed_items) <= 1:
         return ""
-    brief_list = "\n".join([f"- {x['title']} ({x['mode']}): {x['analysis'][:300]}..." for x in analyzed_items])
+    brief_list = "\n".join([f"- {x['title']}: {x['analysis'][:300]}..." for x in analyzed_items])
     prompt = f"""
 بناءً على الاكتشافات التالية التي تم تحليلها اليوم:
 {brief_list}
@@ -408,32 +431,31 @@ def send_to_telegram(text):
 
 # ==================== 8. نقطة التشغيل الرئيسية ====================
 def main():
-    print("🚀 بدء دورة الرصد والتشخيص والاستغلال...")
+    print(f"🚀 بدء الدورة | الوضع النشط: {MODE_LABELS[RADAR_MODE]}")
     active_models = discover_active_gemini_models()
     seen_ids = load_memory()
 
     discoveries = fetch_github_discoveries(seen_ids) + fetch_hn_discoveries(seen_ids)
     if not discoveries:
-        print("ℹ️ لا توجد اكتشافات جديدة مطابقة لمعايير الجودة في هذه الدورة.")
+        print("ℹ️ لا توجد مستجدات جديدة مطابقة لمعايير الوضع الحالي في هذه الدورة.")
         save_memory(seen_ids)
         return
 
-    now_str = datetime.utcnow().strftime("%Y-%m-%d_%H-%M")
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M")
     analyzed_records = []
     report_sections = []
 
     for item in discoveries:
-        print(f"🔍 فحص وتحليل: {item['title']} | [{item['mode']}]")
+        print(f"🔍 فحص وتحليل: {item['title']}")
         probe_data = technical_probe(item)
         analysis, success = analyze_discovery(item, probe_data, active_models)
 
         if success:
             seen_ids.add(item["uid"])
-            analyzed_records.append({"title": item["title"], "mode": item["mode"], "analysis": analysis})
+            analyzed_records.append({"title": item["title"], "analysis": analysis})
 
         section = (
             f"### {item['title']}\n"
-            f"- **المسار:** {item['mode']}\n"
             f"- **المجال:** {item['domain']}\n"
             f"- **المؤشرات:** {item['metrics']}\n"
             f"- **الرابط:** {item['url']}\n\n"
@@ -443,11 +465,15 @@ def main():
         time.sleep(2.5)
 
     exec_summary = generate_executive_summary(analyzed_records, active_models)
-    header = f"# تقرير الرصد والاستغلال التقني ({now_str} UTC)\n\n{exec_summary}"
+    header = (
+        f"# تقرير الرصد والاستغلال التقني ({now_str} UTC)\n"
+        f"**الوضع التشغيلي:** {MODE_LABELS[RADAR_MODE]}\n\n"
+        f"{exec_summary}"
+    )
     full_report = header + "\n---\n\n".join(report_sections)
 
     os.makedirs(REPORT_DIR, exist_ok=True)
-    report_path = os.path.join(REPORT_DIR, f"report_{now_str}.md")
+    report_path = os.path.join(REPORT_DIR, f"report_{RADAR_MODE}_{now_str}.md")
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(full_report)
 
