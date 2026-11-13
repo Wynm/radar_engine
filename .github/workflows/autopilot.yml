@@ -2,9 +2,18 @@ name: Autonomous Tech Radar Autopilot
 
 on:
   schedule:
-    # يعمل تلقائياً كل 6 ساعات (4 مرات يومياً) مجاناً بالكامل
+    # التشغيل التلقائي كل 6 ساعات يعمل بالوضع العادي الافتراضي (normal)
     - cron: '0 */6 * * *'
-  workflow_dispatch: # يتيح لك التشغيل اليدوي الفوري بضغطة زر
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'اختر وضع الرصد (normal = الرائج ذو الصعود | full = شامل بدون فلترة)'
+        required: true
+        default: 'normal'
+        type: choice
+        options:
+          - normal
+          - full
 
 permissions:
   contents: write
@@ -27,6 +36,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RADAR_MODE: ${{ github.event.inputs.mode || 'normal' }}
         run: python radar_engine.py
 
       - name: حفظ الذاكرة والتقارير الجديدة تلقائياً
