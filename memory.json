@@ -1,18 +1,142 @@
-[
-  "hn_50480391",
-  "hn_50477649",
-  "gh_1456344124",
-  "hn_50480133",
-  "gh_1456342870",
-  "gh_1456060729",
-  "gh_1454851990",
-  "gh_1448515937",
-  "gh_1456183909",
-  "gh_1450794567",
-  "gh_1456020705",
-  "gh_1455383610",
-  "gh_1448754654",
-  "gh_1455750092",
-  "gh_1455042756",
-  "hn_50480144"
-]
+{
+  "hn_50480391": {
+    "title": "hn_50480391",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50477649": {
+    "title": "hn_50477649",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456344124": {
+    "title": "gh_1456344124",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50480133": {
+    "title": "hn_50480133",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456342870": {
+    "title": "gh_1456342870",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456060729": {
+    "title": "gh_1456060729",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1454851990": {
+    "title": "gh_1454851990",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1448515937": {
+    "title": "gh_1448515937",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456183909": {
+    "title": "gh_1456183909",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1450794567": {
+    "title": "gh_1450794567",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456020705": {
+    "title": "gh_1456020705",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1455383610": {
+    "title": "gh_1455383610",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1448754654": {
+    "title": "gh_1448754654",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1455750092": {
+    "title": "gh_1455750092",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1455042756": {
+    "title": "gh_1455042756",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50480144": {
+    "title": "hn_50480144",
+    "stars": 0,
+    "first_seen": "2026-11-13T10:27:30.515846+00:00",
+    "last_seen": "2026-11-13T10:27:30.515846+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1448761997": {
+    "title": "mahmoudtawfik1998/secure-pdf-document-processor",
+    "stars": 1212,
+    "first_seen": "2026-11-13T10:27:30.515873+00:00",
+    "last_seen": "2026-11-13T10:27:30.515873+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1454407753": {
+    "title": "zacharias80/Polymarket-Prediction-Bot",
+    "stars": 91,
+    "first_seen": "2026-11-13T10:27:30.515873+00:00",
+    "last_seen": "2026-11-13T10:27:30.515873+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50475713": {
+    "title": "Edge0-145B: Frontier AI Capabilities on Your Own Computer",
+    "stars": 255,
+    "first_seen": "2026-11-13T10:27:30.515873+00:00",
+    "last_seen": "2026-11-13T10:27:30.515873+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17167": {
+    "title": "Actor, Judge, or Teacher? Understanding Decision Models in Long-Horizon Agents",
+    "stars": 22,
+    "first_seen": "2026-11-13T10:27:30.515873+00:00",
+    "last_seen": "2026-11-13T10:27:30.515873+00:00",
+    "breakout_alerted": false
+  }
+}
