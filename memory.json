@@ -138,5 +138,40 @@
     "first_seen": "2026-11-13T10:27:30.515873+00:00",
     "last_seen": "2026-11-13T10:27:30.515873+00:00",
     "breakout_alerted": false
+  },
+  "gh_1448721315": {
+    "title": "abdulmannanmalik13-wq/adobe-substance-3d-studio",
+    "stars": 1210,
+    "first_seen": "2026-11-13T15:51:49.971235+00:00",
+    "last_seen": "2026-11-13T15:51:49.971235+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1450112320": {
+    "title": "TerminusPotter/quant-trading-bot",
+    "stars": 75,
+    "first_seen": "2026-11-13T15:51:49.971235+00:00",
+    "last_seen": "2026-11-13T15:51:49.971235+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50474959": {
+    "title": "Reverse Engineering My Coway Air Purifier to Ditch the Cloud",
+    "stars": 178,
+    "first_seen": "2026-11-13T15:51:49.971235+00:00",
+    "last_seen": "2026-11-13T15:51:49.971235+00:00",
+    "breakout_alerted": false
+  },
+  "ph_c7a6a931449fea1c5493": {
+    "title": "Templify AI",
+    "stars": 0,
+    "first_seen": "2026-11-13T15:51:49.971235+00:00",
+    "last_seen": "2026-11-13T15:51:49.971235+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.15844": {
+    "title": "Open Vision Banana: A Fully Open Recipe for Generative Visual Perception",
+    "stars": 24,
+    "first_seen": "2026-11-13T15:51:49.971235+00:00",
+    "last_seen": "2026-11-13T15:51:49.971235+00:00",
+    "breakout_alerted": false
   }
 }
