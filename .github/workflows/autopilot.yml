@@ -21,9 +21,16 @@ on:
 permissions:
   contents: write
 
+# منع تداخل دورتين في نفس الوقت (مثلاً يوم الجمعة 18:00 يلتقي الجدولان)
+# حتى لا يتعارض حفظ memory.json والتقارير. الدورة الثانية تنتظر دورها ولا تُلغى.
+concurrency:
+  group: radar-autopilot
+  cancel-in-progress: false
+
 jobs:
   run-radar:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: سحب ملفات النظام
         uses: actions/checkout@v4
@@ -33,6 +40,23 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: ضبط تواريخ التقارير من أسماء ملفاتها
+        # actions/checkout يعطي كل الملفات تاريخ لحظة السحب، فيرى التقرير الأسبوعي
+        # (الذي يفلتر بتاريخ تعديل الملف) كل التقارير القديمة كأنها من اليوم.
+        # هذه الخطوة تعيد لكل تقرير تاريخه الحقيقي المأخوذ من اسمه دون أي تعديل في المحرك.
+        run: |
+          shopt -s nullglob
+          for f in reports/report_*.md; do
+            ts=$(echo "$f" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}' | tail -n1)
+            if [ -n "$ts" ]; then
+              d="${ts%%_*}"
+              t="${ts##*_}"
+              t="${t/-/:}"
+              touch -d "$d $t UTC" "$f" || true
+            fi
+          done
+          echo "تمت معالجة تواريخ $(ls reports/report_*.md 2>/dev/null | wc -l) تقرير."
+
       - name: تحديد الوضع الفعال وتشغيل المحرك
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -41,18 +65,75 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT_SCHEDULE: ${{ github.event.schedule }}
           INPUT_MODE: ${{ github.event.inputs.mode }}
+          PYTHONUNBUFFERED: '1'
+          PYTHONIOENCODING: 'utf-8'
         run: |
           if [ "$EVENT_SCHEDULE" = "0 18 * * 5" ]; then
             export RADAR_MODE="weekly"
           else
             export RADAR_MODE="${INPUT_MODE:-normal}"
           fi
+          # تمرير الوضع للخطوات اللاحقة (الملخص وتنبيه الفشل)
+          echo "RADAR_MODE=$RADAR_MODE" >> "$GITHUB_ENV"
+          echo "🚀 الوضع الفعال: $RADAR_MODE"
           python radar_engine.py
 
       - name: حفظ الذاكرة والتقارير والأصول البرمجية تلقائياً
+        if: ${{ !cancelled() }}
         run: |
           git config --local user.email "autopilot@radar.bot"
           git config --local user.name "TechRadar Bot"
           mkdir -p reports assets
-          git add memory.json reports/ assets/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update radar reports, memory & MVP assets" && git push)
+          if [ -f memory.json ]; then
+            git add memory.json
+          fi
+          git add reports/ assets/
+
+          if git diff --cached --quiet; then
+            echo "ℹ️ لا توجد تغييرات جديدة للحفظ."
+            {
+              echo "## 📡 ملخص تشغيل الرادار"
+              echo "- الوضع: ${RADAR_MODE:-غير محدد}"
+              echo "- لا توجد تغييرات جديدة في هذه الدورة."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          {
+            echo "## 📡 ملخص تشغيل الرادار"
+            echo "- الوضع: ${RADAR_MODE:-غير محدد}"
+            echo "- الملفات المحفوظة:"
+            git diff --cached --name-only | sed 's/^/  - /'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          git commit -m "Auto-update radar reports, memory & MVP assets"
+
+          # دفع مع إعادة المحاولة (حماية من تعارض الدفع إن تغيّر المستودع أثناء التشغيل)
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "✅ تم حفظ الذاكرة والتقارير والأصول البرمجية."
+              exit 0
+            fi
+            echo "⚠️ فشل الدفع (المحاولة $attempt من 3)، جاري المزامنة وإعادة المحاولة..."
+            if ! git pull --rebase origin "${GITHUB_REF_NAME}"; then
+              git rebase --abort || true
+              break
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "❌ تعذر دفع التغييرات إلى المستودع."
+          exit 1
+
+      - name: تنبيه تيليجرام عند فشل التشغيل
+        if: ${{ failure() }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=⚠️ فشل تشغيل الرادار (الوضع: ${RADAR_MODE:-غير محدد}). تفاصيل التشغيل: ${RUN_URL}" \
+              --data-urlencode "disable_web_page_preview=true" > /dev/null || true
+          fi
