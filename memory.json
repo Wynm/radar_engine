@@ -292,5 +292,26 @@
     "first_seen": "2026-11-13T19:21:01.664368+00:00",
     "last_seen": "2026-11-13T19:21:01.664368+00:00",
     "breakout_alerted": false
+  },
+  "gh_1448924811": {
+    "title": "dabingfy-dot/solo-to-team-skills",
+    "stars": 850,
+    "first_seen": "2026-11-14T05:26:15.522306+00:00",
+    "last_seen": "2026-11-14T05:26:15.522306+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1457226562": {
+    "title": "prismarmorergirder/wallet-security-checker",
+    "stars": 115,
+    "first_seen": "2026-11-14T05:26:15.522306+00:00",
+    "last_seen": "2026-11-14T05:26:15.522306+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50493251": {
+    "title": "Nvidia Allegedly Engineered Scarcity by Funding AI Startups to Buy Its GPUs",
+    "stars": 175,
+    "first_seen": "2026-11-14T05:26:15.522306+00:00",
+    "last_seen": "2026-11-14T05:26:15.522306+00:00",
+    "breakout_alerted": false
   }
 }
