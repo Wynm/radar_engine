@@ -313,5 +313,33 @@
     "first_seen": "2026-11-14T05:26:15.522306+00:00",
     "last_seen": "2026-11-14T05:26:15.522306+00:00",
     "breakout_alerted": false
+  },
+  "gh_1451662178": {
+    "title": "Dodaios/ste80-humanizer",
+    "stars": 500,
+    "first_seen": "2026-11-14T13:08:19.443719+00:00",
+    "last_seen": "2026-11-14T13:08:19.443719+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1456986438": {
+    "title": "zacharyrogue/Crypto-Whale-Tracker",
+    "stars": 139,
+    "first_seen": "2026-11-14T13:08:19.443719+00:00",
+    "last_seen": "2026-11-14T13:08:19.443719+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50484658": {
+    "title": "Jonathan Blow – If AI solved coding, why is my software still the same? [video]",
+    "stars": 344,
+    "first_seen": "2026-11-14T13:08:19.443719+00:00",
+    "last_seen": "2026-11-14T13:08:19.443719+00:00",
+    "breakout_alerted": false
+  },
+  "ph_0e3c83b7772f27505da2": {
+    "title": "AnyoneHiring.today",
+    "stars": 0,
+    "first_seen": "2026-11-14T13:08:19.443719+00:00",
+    "last_seen": "2026-11-14T13:08:19.443719+00:00",
+    "breakout_alerted": false
   }
 }
