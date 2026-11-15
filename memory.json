@@ -411,5 +411,40 @@
     "first_seen": "2026-11-15T05:23:46.455698+00:00",
     "last_seen": "2026-11-15T05:23:46.455698+00:00",
     "breakout_alerted": false
+  },
+  "gh_1458091062": {
+    "title": "toppatronweave/ai--manus2.0",
+    "stars": 665,
+    "first_seen": "2026-11-15T13:37:39.204032+00:00",
+    "last_seen": "2026-11-15T13:37:39.204032+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1457686106": {
+    "title": "FallenBeyondEmblem/Crypto-Ai-rpocket-Trading-Bot",
+    "stars": 51,
+    "first_seen": "2026-11-15T13:37:39.204032+00:00",
+    "last_seen": "2026-11-15T13:37:39.204032+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50441444": {
+    "title": "Generative AI uses more energy on non-English text",
+    "stars": 222,
+    "first_seen": "2026-11-15T13:37:39.204032+00:00",
+    "last_seen": "2026-11-15T13:37:39.204032+00:00",
+    "breakout_alerted": false
+  },
+  "ph_c5b70ad9b674e540b261": {
+    "title": "TwoBucket",
+    "stars": 0,
+    "first_seen": "2026-11-15T13:37:39.204032+00:00",
+    "last_seen": "2026-11-15T13:37:39.204032+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.08318": {
+    "title": "Learning the Task or Learning the Verifier? Rethinking Criteria Exposure in Embodied Self-Improvement",
+    "stars": 21,
+    "first_seen": "2026-11-15T13:37:39.204032+00:00",
+    "last_seen": "2026-11-15T13:37:39.204032+00:00",
+    "breakout_alerted": false
   }
 }
