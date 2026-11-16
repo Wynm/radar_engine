@@ -509,5 +509,26 @@
     "first_seen": "2026-11-16T05:22:16.708622+00:00",
     "last_seen": "2026-11-16T05:22:16.708622+00:00",
     "breakout_alerted": false
+  },
+  "hn_50510296": {
+    "title": "WebGL Flight Simulator with seed generated terrain",
+    "stars": 202,
+    "first_seen": "2026-11-16T15:07:43.917788+00:00",
+    "last_seen": "2026-11-16T15:07:43.917788+00:00",
+    "breakout_alerted": false
+  },
+  "ph_c0bf3f471d20d8c207ec": {
+    "title": "Cookie Away",
+    "stars": 0,
+    "first_seen": "2026-11-16T15:07:43.917788+00:00",
+    "last_seen": "2026-11-16T15:07:43.917788+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17831": {
+    "title": "V-JEPA-LM: Video-Language Models That Read Dynamics Beyond Static, Text-Aligned Representations",
+    "stars": 21,
+    "first_seen": "2026-11-16T15:07:43.917788+00:00",
+    "last_seen": "2026-11-16T15:07:43.917788+00:00",
+    "breakout_alerted": false
   }
 }
