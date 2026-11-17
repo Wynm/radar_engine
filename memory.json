@@ -635,5 +635,89 @@
     "first_seen": "2026-11-17T10:14:51.462427+00:00",
     "last_seen": "2026-11-17T10:14:51.462427+00:00",
     "breakout_alerted": false
+  },
+  "gh_1461405364": {
+    "title": "monaxat/monster-hunters-guild",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461408216": {
+    "title": "jihwan-cyber/kimuchihwan",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461256704": {
+    "title": "CodeWithSachin/ngx-video-js",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461060158": {
+    "title": "mon231/com.rel.zorek",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461405166": {
+    "title": "HallaEhab/bank-marketing-analysis",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1459636958": {
+    "title": "nagendrag-17/ecommerce-sales-analysis",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50530734": {
+    "title": "We built Jarvis, our AI team member for every department",
+    "stars": 1,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50530711": {
+    "title": "Can a formally-verified C compiler be as performant as GCC -O2?",
+    "stars": 1,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "ph_2f66329c0b32f5ab0c70": {
+    "title": "Trading Agents",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "ph_40e6b1aa9341a9075314": {
+    "title": "Creatify Max",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.18919": {
+    "title": "Correcting Persistent Failures in Point-Cloud Grasping Policies using Human Demonstrations in Virtual Reality",
+    "stars": 2,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.16642": {
+    "title": "Dataset Distillation via Drifting",
+    "stars": 0,
+    "first_seen": "2026-11-17T12:53:50.927113+00:00",
+    "last_seen": "2026-11-17T12:53:50.927113+00:00",
+    "breakout_alerted": false
   }
 }
