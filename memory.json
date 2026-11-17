@@ -719,5 +719,40 @@
     "first_seen": "2026-11-17T12:53:50.927113+00:00",
     "last_seen": "2026-11-17T12:53:50.927113+00:00",
     "breakout_alerted": false
+  },
+  "gh_1457362196": {
+    "title": "CzzzzzzJ/mdldm-maitian",
+    "stars": 881,
+    "first_seen": "2026-11-17T15:39:15.589659+00:00",
+    "last_seen": "2026-11-17T15:39:15.589659+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1459175850": {
+    "title": "motshepula333/crypto-ai-trading-bot",
+    "stars": 92,
+    "first_seen": "2026-11-17T15:39:15.589659+00:00",
+    "last_seen": "2026-11-17T15:39:15.589659+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50532086": {
+    "title": "We don't need more apps. We need better open source",
+    "stars": 110,
+    "first_seen": "2026-11-17T15:39:15.589659+00:00",
+    "last_seen": "2026-11-17T15:39:15.589659+00:00",
+    "breakout_alerted": false
+  },
+  "ph_caa395db87dca73efa0b": {
+    "title": "RankSpot",
+    "stars": 0,
+    "first_seen": "2026-11-17T15:39:15.589659+00:00",
+    "last_seen": "2026-11-17T15:39:15.589659+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.21218": {
+    "title": "InclusionMed: Benchmarking AI for Inclusive Healthcare",
+    "stars": 58,
+    "first_seen": "2026-11-17T15:39:15.589659+00:00",
+    "last_seen": "2026-11-17T15:39:15.589659+00:00",
+    "breakout_alerted": false
   }
 }
