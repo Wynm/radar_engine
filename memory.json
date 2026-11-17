@@ -530,5 +530,33 @@
     "first_seen": "2026-11-16T15:07:43.917788+00:00",
     "last_seen": "2026-11-16T15:07:43.917788+00:00",
     "breakout_alerted": false
+  },
+  "gh_1455740160": {
+    "title": "racdeufindurch198812/Blender-AI-MCP-Studio",
+    "stars": 514,
+    "first_seen": "2026-11-17T01:42:30.469468+00:00",
+    "last_seen": "2026-11-17T01:42:30.469468+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50524736": {
+    "title": "Windows 11 Is Collecting Data on Which Coding Agents and Developer Tools You Use",
+    "stars": 216,
+    "first_seen": "2026-11-17T01:42:30.469468+00:00",
+    "last_seen": "2026-11-17T01:42:30.469468+00:00",
+    "breakout_alerted": false
+  },
+  "ph_a93fe2026663ae7f78a9": {
+    "title": "Cal.com v7",
+    "stars": 0,
+    "first_seen": "2026-11-17T01:42:30.469468+00:00",
+    "last_seen": "2026-11-17T01:42:30.469468+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17878": {
+    "title": "DySENSE: Dynamic Spatiotemporal ENergy Synthesis and Emulation with Satellite Imagery",
+    "stars": 21,
+    "first_seen": "2026-11-17T01:42:30.469468+00:00",
+    "last_seen": "2026-11-17T01:42:30.469468+00:00",
+    "breakout_alerted": false
   }
 }
