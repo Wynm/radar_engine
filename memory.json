@@ -621,5 +621,19 @@
     "first_seen": "2026-11-17T09:53:47.996328+00:00",
     "last_seen": "2026-11-17T09:53:47.996328+00:00",
     "breakout_alerted": false
+  },
+  "gh_1458993349": {
+    "title": "koanto00-web/ninjatrader-bot",
+    "stars": 98,
+    "first_seen": "2026-11-17T10:14:51.462427+00:00",
+    "last_seen": "2026-11-17T10:14:51.462427+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.21072": {
+    "title": "Sage S2.1 Flash Technical Report",
+    "stars": 21,
+    "first_seen": "2026-11-17T10:14:51.462427+00:00",
+    "last_seen": "2026-11-17T10:14:51.462427+00:00",
+    "breakout_alerted": false
   }
 }
