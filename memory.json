@@ -558,5 +558,68 @@
     "first_seen": "2026-11-17T01:42:30.469468+00:00",
     "last_seen": "2026-11-17T01:42:30.469468+00:00",
     "breakout_alerted": false
+  },
+  "gh_1459846657": {
+    "title": "CosmicLaca/CairnMark",
+    "stars": 0,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461213273": {
+    "title": "Kazutor/btc-race-bot",
+    "stars": 0,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1461213271": {
+    "title": "xcuz1999-beep/btc-race-24h-20261117-0603",
+    "stars": 0,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50529409": {
+    "title": "Show HN: Rindraw – drawing and animation app for iPad, iPhone and Mac",
+    "stars": 1,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50529373": {
+    "title": "Show HN: F1 Metrix, who was the Formula 1 GOAT? An homage to f1metrics",
+    "stars": 1,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "ph_1897925dbdda805e4c10": {
+    "title": "Liquid d1.2",
+    "stars": 0,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "ph_d023656e70424d3512a2": {
+    "title": "Lasso",
+    "stars": 0,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17110": {
+    "title": "SALA: Semantically Aligned Latent Actions Enable Dual-Axis Scaling of Embodied Foundation Models",
+    "stars": 9,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17933": {
+    "title": "OutfitterBench: Evaluating LLM Agents on Long-Horizon Resource Allocation and Commitment Coordination",
+    "stars": 2,
+    "first_seen": "2026-11-17T09:53:47.996328+00:00",
+    "last_seen": "2026-11-17T09:53:47.996328+00:00",
+    "breakout_alerted": false
   }
 }
