@@ -782,5 +782,33 @@
     "first_seen": "2026-11-18T00:41:46.346382+00:00",
     "last_seen": "2026-11-18T00:41:46.346382+00:00",
     "breakout_alerted": false
+  },
+  "gh_1459167678": {
+    "title": "csidrenaetis26-lang/autotrade-bot",
+    "stars": 153,
+    "first_seen": "2026-11-18T15:17:59.913474+00:00",
+    "last_seen": "2026-11-18T15:17:59.913474+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50546312": {
+    "title": "Can Peer Review Survive AI-Generated Text? [pdf]",
+    "stars": 45,
+    "first_seen": "2026-11-18T15:17:59.913474+00:00",
+    "last_seen": "2026-11-18T15:17:59.913474+00:00",
+    "breakout_alerted": false
+  },
+  "ph_21e86ba4278f1f541078": {
+    "title": "KaDeep AI",
+    "stars": 0,
+    "first_seen": "2026-11-18T15:17:59.913474+00:00",
+    "last_seen": "2026-11-18T15:17:59.913474+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17048": {
+    "title": "Beyond Answering: Learning to Speak First and Act in Streaming Video",
+    "stars": 32,
+    "first_seen": "2026-11-18T15:17:59.913474+00:00",
+    "last_seen": "2026-11-18T15:17:59.913474+00:00",
+    "breakout_alerted": false
   }
 }
