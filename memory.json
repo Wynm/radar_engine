@@ -754,5 +754,33 @@
     "first_seen": "2026-11-17T15:39:15.589659+00:00",
     "last_seen": "2026-11-17T15:39:15.589659+00:00",
     "breakout_alerted": false
+  },
+  "gh_1460417668": {
+    "title": "sybil-solutions/inference-optimisation-skill",
+    "stars": 923,
+    "first_seen": "2026-11-18T00:41:46.346382+00:00",
+    "last_seen": "2026-11-18T00:41:46.346382+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1459182530": {
+    "title": "Demian170/dupedealer-steam-market",
+    "stars": 153,
+    "first_seen": "2026-11-18T00:41:46.346382+00:00",
+    "last_seen": "2026-11-18T00:41:46.346382+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50535885": {
+    "title": "MAI Code 2 and Code 2 Flash",
+    "stars": 272,
+    "first_seen": "2026-11-18T00:41:46.346382+00:00",
+    "last_seen": "2026-11-18T00:41:46.346382+00:00",
+    "breakout_alerted": false
+  },
+  "ph_ee98816210a0da10e04e": {
+    "title": "GlissTouch",
+    "stars": 0,
+    "first_seen": "2026-11-18T00:41:46.346382+00:00",
+    "last_seen": "2026-11-18T00:41:46.346382+00:00",
+    "breakout_alerted": false
   }
 }
