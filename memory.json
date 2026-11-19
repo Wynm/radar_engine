@@ -866,5 +866,40 @@
     "first_seen": "2026-11-19T07:10:45.210324+00:00",
     "last_seen": "2026-11-19T07:10:45.210324+00:00",
     "breakout_alerted": false
+  },
+  "gh_1455751043": {
+    "title": "zovulrira1974/blender-ai-copilot-assets",
+    "stars": 510,
+    "first_seen": "2026-11-19T20:07:34.351851+00:00",
+    "last_seen": "2026-11-19T20:07:34.351851+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1459236880": {
+    "title": "Afabio2007/weekend-lottery-contract",
+    "stars": 153,
+    "first_seen": "2026-11-19T20:07:34.351851+00:00",
+    "last_seen": "2026-11-19T20:07:34.351851+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50562320": {
+    "title": "Launch HN: Onlook (YC W25) – An open-source developer tool for designers",
+    "stars": 50,
+    "first_seen": "2026-11-19T20:07:34.351851+00:00",
+    "last_seen": "2026-11-19T20:07:34.351851+00:00",
+    "breakout_alerted": false
+  },
+  "ph_969b10339d321af6c8e5": {
+    "title": "CodeDesign v3",
+    "stars": 0,
+    "first_seen": "2026-11-19T20:07:34.351851+00:00",
+    "last_seen": "2026-11-19T20:07:34.351851+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.17600": {
+    "title": "LightTAR: Light and Fast Target-Aware Representations for Multimodal Tabular Learning",
+    "stars": 20,
+    "first_seen": "2026-11-19T20:07:34.351851+00:00",
+    "last_seen": "2026-11-19T20:07:34.351851+00:00",
+    "breakout_alerted": false
   }
 }
