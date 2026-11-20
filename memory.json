@@ -922,5 +922,26 @@
     "first_seen": "2026-11-20T06:12:32.353334+00:00",
     "last_seen": "2026-11-20T06:12:32.353334+00:00",
     "breakout_alerted": false
+  },
+  "gh_1463963309": {
+    "title": "iamajmeena/neonclipping",
+    "stars": 1189,
+    "first_seen": "2026-11-20T19:42:52.369803+00:00",
+    "last_seen": "2026-11-20T19:42:52.369803+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50574968": {
+    "title": "Levent Alpöge claims proof of the Generalized Riemann Hypothesis [pdf]",
+    "stars": 1899,
+    "first_seen": "2026-11-20T19:42:52.369803+00:00",
+    "last_seen": "2026-11-20T19:42:52.369803+00:00",
+    "breakout_alerted": false
+  },
+  "ph_3b0d689c2d27ca23372f": {
+    "title": "Badya",
+    "stars": 0,
+    "first_seen": "2026-11-20T19:42:52.369803+00:00",
+    "last_seen": "2026-11-20T19:42:52.369803+00:00",
+    "breakout_alerted": false
   }
 }
