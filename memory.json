@@ -971,5 +971,26 @@
     "first_seen": "2026-11-21T06:02:18.966564+00:00",
     "last_seen": "2026-11-21T06:02:18.966564+00:00",
     "breakout_alerted": false
+  },
+  "gh_1459020341": {
+    "title": "YellowLaborerMarket/Gemini-Config-Checker-",
+    "stars": 472,
+    "first_seen": "2026-11-21T18:49:23.718926+00:00",
+    "last_seen": "2026-11-21T18:49:23.718926+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50546587": {
+    "title": "LLMs can read and write executables byte by byte from a hex dump",
+    "stars": 111,
+    "first_seen": "2026-11-21T18:49:23.718926+00:00",
+    "last_seen": "2026-11-21T18:49:23.718926+00:00",
+    "breakout_alerted": false
+  },
+  "ph_b7f1ef15c53bf55a4d48": {
+    "title": "Doddle",
+    "stars": 0,
+    "first_seen": "2026-11-21T18:49:23.718926+00:00",
+    "last_seen": "2026-11-21T18:49:23.718926+00:00",
+    "breakout_alerted": false
   }
 }
