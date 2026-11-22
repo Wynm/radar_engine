@@ -1020,5 +1020,26 @@
     "first_seen": "2026-11-22T05:38:34.079291+00:00",
     "last_seen": "2026-11-22T05:38:34.079291+00:00",
     "breakout_alerted": false
+  },
+  "gh_1459019359": {
+    "title": "WinnerSpecialist/Gemini-Config-Checker-",
+    "stars": 469,
+    "first_seen": "2026-11-22T14:14:39.516399+00:00",
+    "last_seen": "2026-11-22T14:14:39.516399+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50595554": {
+    "title": "Data Processing Incidents on Inference Providers",
+    "stars": 212,
+    "first_seen": "2026-11-22T14:14:39.516399+00:00",
+    "last_seen": "2026-11-22T14:14:39.516399+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.26627": {
+    "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+    "stars": 20,
+    "first_seen": "2026-11-22T14:14:39.516399+00:00",
+    "last_seen": "2026-11-22T14:14:39.516399+00:00",
+    "breakout_alerted": false
   }
 }
