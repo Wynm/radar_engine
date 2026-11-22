@@ -1041,5 +1041,33 @@
     "first_seen": "2026-11-22T14:14:39.516399+00:00",
     "last_seen": "2026-11-22T14:14:39.516399+00:00",
     "breakout_alerted": false
+  },
+  "gh_1463683138": {
+    "title": "INK-Q/agy-fast",
+    "stars": 502,
+    "first_seen": "2026-11-22T23:22:12.980533+00:00",
+    "last_seen": "2026-11-22T23:22:12.980533+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1467894127": {
+    "title": "muptezel1bay/pump-fun-volume-bump-bot-2026",
+    "stars": 226,
+    "first_seen": "2026-11-22T23:22:12.980533+00:00",
+    "last_seen": "2026-11-22T23:22:12.980533+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50603845": {
+    "title": "A Beginner's Guide to Local AI with Inkling, Qwen, and Unsloth",
+    "stars": 104,
+    "first_seen": "2026-11-22T23:22:12.980533+00:00",
+    "last_seen": "2026-11-22T23:22:12.980533+00:00",
+    "breakout_alerted": false
+  },
+  "ph_1c9cd3c94af76c59e23c": {
+    "title": "Yoroll",
+    "stars": 0,
+    "first_seen": "2026-11-22T23:22:12.980533+00:00",
+    "last_seen": "2026-11-22T23:22:12.980533+00:00",
+    "breakout_alerted": false
   }
 }
