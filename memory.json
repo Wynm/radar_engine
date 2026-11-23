@@ -1069,5 +1069,40 @@
     "first_seen": "2026-11-22T23:22:12.980533+00:00",
     "last_seen": "2026-11-22T23:22:12.980533+00:00",
     "breakout_alerted": false
+  },
+  "gh_1460452633": {
+    "title": "pierridotite/mobile-agent-testers",
+    "stars": 817,
+    "first_seen": "2026-11-23T06:21:19.923396+00:00",
+    "last_seen": "2026-11-23T06:21:19.923396+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1468321920": {
+    "title": "mykarenlo-work85/polymarket-trading-arbitrage-bot",
+    "stars": 302,
+    "first_seen": "2026-11-23T06:21:19.923396+00:00",
+    "last_seen": "2026-11-23T06:21:19.923396+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50599762": {
+    "title": "Show HN: I built a game where you are an LLM's subagent",
+    "stars": 302,
+    "first_seen": "2026-11-23T06:21:19.923396+00:00",
+    "last_seen": "2026-11-23T06:21:19.923396+00:00",
+    "breakout_alerted": false
+  },
+  "ph_50576d926329aa09efa0": {
+    "title": "MeshLive",
+    "stars": 0,
+    "first_seen": "2026-11-23T06:21:19.923396+00:00",
+    "last_seen": "2026-11-23T06:21:19.923396+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.27963": {
+    "title": "Non-penetrating World Models",
+    "stars": 32,
+    "first_seen": "2026-11-23T06:21:19.923396+00:00",
+    "last_seen": "2026-11-23T06:21:19.923396+00:00",
+    "breakout_alerted": false
   }
 }
