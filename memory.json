@@ -1104,5 +1104,40 @@
     "first_seen": "2026-11-23T06:21:19.923396+00:00",
     "last_seen": "2026-11-23T06:21:19.923396+00:00",
     "breakout_alerted": false
+  },
+  "gh_1464795219": {
+    "title": "ThreatDefence/agentic-attack-detections",
+    "stars": 560,
+    "first_seen": "2026-11-23T23:32:06.614241+00:00",
+    "last_seen": "2026-11-23T23:32:06.614241+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1469019913": {
+    "title": "mutex-gander/hyperliquid-perp-market-maker-bot",
+    "stars": 263,
+    "first_seen": "2026-11-23T23:32:06.614241+00:00",
+    "last_seen": "2026-11-23T23:32:06.614241+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50615481": {
+    "title": "Kagi Mail (public beta)",
+    "stars": 314,
+    "first_seen": "2026-11-23T23:32:06.614241+00:00",
+    "last_seen": "2026-11-23T23:32:06.614241+00:00",
+    "breakout_alerted": false
+  },
+  "ph_8edf310cbf9c0577d144": {
+    "title": "Gauth Personal Study Agent",
+    "stars": 0,
+    "first_seen": "2026-11-23T23:32:06.614241+00:00",
+    "last_seen": "2026-11-23T23:32:06.614241+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.26954": {
+    "title": "Learning Video Foresight Reasoning from Unlabeled Videos via On-Policy Self-Distillation",
+    "stars": 20,
+    "first_seen": "2026-11-23T23:32:06.614241+00:00",
+    "last_seen": "2026-11-23T23:32:06.614241+00:00",
+    "breakout_alerted": false
   }
 }
