@@ -1139,5 +1139,40 @@
     "first_seen": "2026-11-23T23:32:06.614241+00:00",
     "last_seen": "2026-11-23T23:32:06.614241+00:00",
     "breakout_alerted": false
+  },
+  "gh_1467769720": {
+    "title": "erkamyaman/safe-anything",
+    "stars": 544,
+    "first_seen": "2026-11-24T08:54:25.423561+00:00",
+    "last_seen": "2026-11-24T08:54:25.423561+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1469008002": {
+    "title": "lucast752/polymarket-trading-arbitrage-bot",
+    "stars": 141,
+    "first_seen": "2026-11-24T08:54:25.423561+00:00",
+    "last_seen": "2026-11-24T08:54:25.423561+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50600838": {
+    "title": "C++26 is done (again): ISO C++ meeting trip report",
+    "stars": 123,
+    "first_seen": "2026-11-24T08:54:25.423561+00:00",
+    "last_seen": "2026-11-24T08:54:25.423561+00:00",
+    "breakout_alerted": false
+  },
+  "ph_6abfe63fbd009c41dccc": {
+    "title": "Hourly Journal",
+    "stars": 0,
+    "first_seen": "2026-11-24T08:54:25.423561+00:00",
+    "last_seen": "2026-11-24T08:54:25.423561+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.30662": {
+    "title": "WeMM-Ecom: Advancing Multimodal Content Understanding for WeChat E-Commerce",
+    "stars": 22,
+    "first_seen": "2026-11-24T08:54:25.423561+00:00",
+    "last_seen": "2026-11-24T08:54:25.423561+00:00",
+    "breakout_alerted": false
   }
 }
