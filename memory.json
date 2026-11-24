@@ -1174,5 +1174,33 @@
     "first_seen": "2026-11-24T08:54:25.423561+00:00",
     "last_seen": "2026-11-24T08:54:25.423561+00:00",
     "breakout_alerted": false
+  },
+  "gh_1465322684": {
+    "title": "sous-labs/songe",
+    "stars": 595,
+    "first_seen": "2026-11-24T22:01:51.079897+00:00",
+    "last_seen": "2026-11-24T22:01:51.079897+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1470641357": {
+    "title": "Demir426/hyperliquid-perp-market-maker-bot",
+    "stars": 120,
+    "first_seen": "2026-11-24T22:01:51.079897+00:00",
+    "last_seen": "2026-11-24T22:01:51.079897+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50633922": {
+    "title": "Ternary Bonsai 2.5 27B",
+    "stars": 167,
+    "first_seen": "2026-11-24T22:01:51.079897+00:00",
+    "last_seen": "2026-11-24T22:01:51.079897+00:00",
+    "breakout_alerted": false
+  },
+  "ph_088f7c322a49586bbe2a": {
+    "title": "tday.com",
+    "stars": 0,
+    "first_seen": "2026-11-24T22:01:51.079897+00:00",
+    "last_seen": "2026-11-24T22:01:51.079897+00:00",
+    "breakout_alerted": false
   }
 }
