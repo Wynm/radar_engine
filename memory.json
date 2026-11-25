@@ -1202,5 +1202,40 @@
     "first_seen": "2026-11-24T22:01:51.079897+00:00",
     "last_seen": "2026-11-24T22:01:51.079897+00:00",
     "breakout_alerted": false
+  },
+  "gh_1469329665": {
+    "title": "Indigo-0167/universal-game-mod-manager",
+    "stars": 1038,
+    "first_seen": "2026-11-25T07:31:19.381666+00:00",
+    "last_seen": "2026-11-25T07:31:19.381666+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1470880509": {
+    "title": "MikhailMa649/polymarket-trading-bot-clob-arbitrage",
+    "stars": 208,
+    "first_seen": "2026-11-25T07:31:19.381666+00:00",
+    "last_seen": "2026-11-25T07:31:19.381666+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50630594": {
+    "title": "Active intrusion campaign against Check Point security management servers",
+    "stars": 281,
+    "first_seen": "2026-11-25T07:31:19.381666+00:00",
+    "last_seen": "2026-11-25T07:31:19.381666+00:00",
+    "breakout_alerted": false
+  },
+  "ph_502bb1231b32ed5b66b9": {
+    "title": "Umami Manager",
+    "stars": 0,
+    "first_seen": "2026-11-25T07:31:19.381666+00:00",
+    "last_seen": "2026-11-25T07:31:19.381666+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.25509": {
+    "title": "LingSante MedGuard Technical Report",
+    "stars": 26,
+    "first_seen": "2026-11-25T07:31:19.381666+00:00",
+    "last_seen": "2026-11-25T07:31:19.381666+00:00",
+    "breakout_alerted": false
   }
 }
