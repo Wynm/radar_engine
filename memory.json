@@ -1237,5 +1237,40 @@
     "first_seen": "2026-11-25T07:31:19.381666+00:00",
     "last_seen": "2026-11-25T07:31:19.381666+00:00",
     "breakout_alerted": false
+  },
+  "gh_1469320737": {
+    "title": "Basil0879/steam-game-idler",
+    "stars": 681,
+    "first_seen": "2026-11-25T21:14:59.222160+00:00",
+    "last_seen": "2026-11-25T21:14:59.222160+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1469958198": {
+    "title": "pinargomez/raydium-meteora-grpc-sniper-bot",
+    "stars": 171,
+    "first_seen": "2026-11-25T21:14:59.222160+00:00",
+    "last_seen": "2026-11-25T21:14:59.222160+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50624446": {
+    "title": "Porting Rockbox to an undocumented $9 AliExpress 'YP3' MP3 player with LLMs",
+    "stars": 164,
+    "first_seen": "2026-11-25T21:14:59.222160+00:00",
+    "last_seen": "2026-11-25T21:14:59.222160+00:00",
+    "breakout_alerted": false
+  },
+  "ph_7fe65c42e48399b4c91f": {
+    "title": "MyClaw 3.0",
+    "stars": 0,
+    "first_seen": "2026-11-25T21:14:59.222160+00:00",
+    "last_seen": "2026-11-25T21:14:59.222160+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.31358": {
+    "title": "Nemotron-Labs-VisualCreation: Pixel as Code for Agentic Visual Creation",
+    "stars": 80,
+    "first_seen": "2026-11-25T21:14:59.222160+00:00",
+    "last_seen": "2026-11-25T21:14:59.222160+00:00",
+    "breakout_alerted": false
   }
 }
