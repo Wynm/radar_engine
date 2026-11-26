@@ -1307,5 +1307,33 @@
     "first_seen": "2026-11-26T07:20:09.321788+00:00",
     "last_seen": "2026-11-26T07:20:09.321788+00:00",
     "breakout_alerted": false
+  },
+  "gh_1471624301": {
+    "title": "nexu-io/opengame",
+    "stars": 708,
+    "first_seen": "2026-11-26T21:03:53.486737+00:00",
+    "last_seen": "2026-11-26T21:03:53.486737+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1465556830": {
+    "title": "byttrade/free-crypto-trading-bot",
+    "stars": 59,
+    "first_seen": "2026-11-26T21:03:53.486737+00:00",
+    "last_seen": "2026-11-26T21:03:53.486737+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50652527": {
+    "title": "OpenAI may be in cost control mode",
+    "stars": 95,
+    "first_seen": "2026-11-26T21:03:53.486737+00:00",
+    "last_seen": "2026-11-26T21:03:53.486737+00:00",
+    "breakout_alerted": false
+  },
+  "ph_aec00744439bfe1ba22b": {
+    "title": "Hello Transcribe 5",
+    "stars": 0,
+    "first_seen": "2026-11-26T21:03:53.486737+00:00",
+    "last_seen": "2026-11-26T21:03:53.486737+00:00",
+    "breakout_alerted": false
   }
 }
