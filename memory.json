@@ -1363,5 +1363,33 @@
     "first_seen": "2026-11-27T07:16:08.728597+00:00",
     "last_seen": "2026-11-27T07:16:08.728597+00:00",
     "breakout_alerted": false
+  },
+  "gh_1474626928": {
+    "title": "gkshitij299-ship-it/polymarket-trading-arbitrage-bot-desalan",
+    "stars": 153,
+    "first_seen": "2026-11-27T20:48:23.959208+00:00",
+    "last_seen": "2026-11-27T20:48:23.959208+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50663595": {
+    "title": "Group chat where your AI talks behind your back",
+    "stars": 629,
+    "first_seen": "2026-11-27T20:48:23.959208+00:00",
+    "last_seen": "2026-11-27T20:48:23.959208+00:00",
+    "breakout_alerted": false
+  },
+  "ph_ac19a4dba7d203b79fb7": {
+    "title": "Wizstar R1",
+    "stars": 0,
+    "first_seen": "2026-11-27T20:48:23.959208+00:00",
+    "last_seen": "2026-11-27T20:48:23.959208+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.31619": {
+    "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
+    "stars": 57,
+    "first_seen": "2026-11-27T20:48:23.959208+00:00",
+    "last_seen": "2026-11-27T20:48:23.959208+00:00",
+    "breakout_alerted": false
   }
 }
