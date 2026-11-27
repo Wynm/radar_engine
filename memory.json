@@ -1335,5 +1335,33 @@
     "first_seen": "2026-11-26T21:03:53.486737+00:00",
     "last_seen": "2026-11-26T21:03:53.486737+00:00",
     "breakout_alerted": false
+  },
+  "gh_1466272233": {
+    "title": "w01fb0ss/PiBot",
+    "stars": 662,
+    "first_seen": "2026-11-27T07:16:08.728597+00:00",
+    "last_seen": "2026-11-27T07:16:08.728597+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50663089": {
+    "title": "The need for a formally verifiable mainstream programming language",
+    "stars": 76,
+    "first_seen": "2026-11-27T07:16:08.728597+00:00",
+    "last_seen": "2026-11-27T07:16:08.728597+00:00",
+    "breakout_alerted": false
+  },
+  "ph_c481d10065232f116eba": {
+    "title": "ExtraOrbital",
+    "stars": 0,
+    "first_seen": "2026-11-27T07:16:08.728597+00:00",
+    "last_seen": "2026-11-27T07:16:08.728597+00:00",
+    "breakout_alerted": false
+  },
+  "hf_2611.34232": {
+    "title": "OS-Omni: Benchmarking Generalist Computer-Using Agents on Long-Horizon Workflows Across Platforms",
+    "stars": 72,
+    "first_seen": "2026-11-27T07:16:08.728597+00:00",
+    "last_seen": "2026-11-27T07:16:08.728597+00:00",
+    "breakout_alerted": false
   }
 }
