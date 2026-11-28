@@ -1419,5 +1419,33 @@
     "first_seen": "2026-11-28T06:48:03.076273+00:00",
     "last_seen": "2026-11-28T06:48:03.076273+00:00",
     "breakout_alerted": false
+  },
+  "gh_1466927775": {
+    "title": "Developing-Gamer/agent-sim",
+    "stars": 635,
+    "first_seen": "2026-11-28T19:39:59.829397+00:00",
+    "last_seen": "2026-11-28T19:39:59.829397+00:00",
+    "breakout_alerted": false
+  },
+  "gh_1473662941": {
+    "title": "Agenord/crypto-ai-trading-bot",
+    "stars": 214,
+    "first_seen": "2026-11-28T19:39:59.829397+00:00",
+    "last_seen": "2026-11-28T19:39:59.829397+00:00",
+    "breakout_alerted": false
+  },
+  "hn_50680168": {
+    "title": "Donald Knuth suspends error bounties due to an influx of AI-generated reports",
+    "stars": 237,
+    "first_seen": "2026-11-28T19:39:59.829397+00:00",
+    "last_seen": "2026-11-28T19:39:59.829397+00:00",
+    "breakout_alerted": false
+  },
+  "ph_28b1030d2e9c5a7c77e4": {
+    "title": "Tano",
+    "stars": 0,
+    "first_seen": "2026-11-28T19:39:59.829397+00:00",
+    "last_seen": "2026-11-28T19:39:59.829397+00:00",
+    "breakout_alerted": false
   }
 }
